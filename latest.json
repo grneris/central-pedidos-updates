@@ -1,0 +1,7 @@
+{
+  "version": "3.1.0",
+  "installer_url": "https://github.com/grneris/central-pedidos-updates/releases/download/v3.1.0/ConversorPedidos_Comercial_Setup_3.1.0.exe",
+  "sha256": "31680871a1a24acbfb69efcf3d9fb7607be4c6bcd37dc57eb226ec0891ff6dd0",
+  "notes": "# CENTRAL DE PEDIDOS 3.1.0\n\nEsta versão leva ao instalador comercial as melhorias desenvolvidas depois da\n3.0.0 e inaugura o canal de atualizações automáticas do aplicativo desktop.\n\n## Principais alterações\n\n- catálogos e validações reforçados na CENTRAL DE PEDIDOS;\n- exportações organizadas por rede e correções no de-para;\n- permissões e funções centralizadas por usuário;\n- tratamento de produtos inativos e divergência de data de entrega;\n- consulta automática e manual de novas versões;\n- download do instalador por HTTPS com validação SHA-256;\n- atualização silenciosa que preserva licença, usuários, catálogos e\n  preferências locais.\n\n## Distribuição\n\nO build comercial gera o instalador 3.1.0, seu checksum `.sha256` e o manifesto\n`latest.json`. O manifesto e o instalador devem ser publicados em um canal HTTPS\npúblico controlado pela empresa.\n\n> O instalador ainda não possui assinatura Authenticode; a integridade do\n> download é verificada pelo SHA-256 informado no manifesto HTTPS.",
+  "mandatory": false
+}

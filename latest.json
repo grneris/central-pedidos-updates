@@ -1,6 +1,6 @@
 {
   "version": "3.1.4",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.4.exe",
+  "installer_url": "https://github.com/grneris/central-pedidos-updates/releases/latest/download/CentralPedidosSetup.exe",
   "sha256": "6f8aaefc1be8aa2f0edecf636957910e8a836bc9aa324459e871023a6955044d",
   "notes": "# Conversor de Pedidos 3.1.4\n\nAtualização corretiva para a **Central de Pedidos** e o Administrador de\nLicenças.\n\n## Correções\n\n- importação SIC: páginas finais que contêm apenas totais e repetem o cabeçalho\n  não geram mais pedidos vazios nem pendências bloqueantes falsas;\n- Administrador de Licenças: ao confirmar uma licença portátil, o dispositivo\n  `*` é preenchido automaticamente e a emissão fica disponível com os demais\n  campos obrigatórios preenchidos.\n- validação de produtos: permite marcar vários pendentes para criar produtos\n  distintos em lote, com vínculo ativo por rede e confirmação antes de gravar.\n\n## Distribuição\n\nO instalador comercial 3.1.4 é distribuído com o respectivo arquivo `.sha256`\ne o manifesto `latest.json` no canal HTTPS de atualização.\n\n> Este instalador não possui assinatura Authenticode. Confira o SHA-256 do\n> arquivo baixado antes da instalação.",
   "mandatory": false

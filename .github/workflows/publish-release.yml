@@ -1,0 +1,243 @@
+name: Publicar release do instalador
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ConversorPedidos_Comercial_Setup_*.exe'
+      - 'latest.json'
+      - '.github/workflows/publish-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-installer-release
+  cancel-in-progress: false
+
+jobs:
+  publish-release:
+    name: Publicar instalador
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Identificar instalador e versão
+        id: installer
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          INSTALLER=''
+
+          # Em um push com instalador, prioriza o .exe alterado nesse push.
+          # Isso permite publicar corretamente mesmo se latest.json for atualizado
+          # em um commit separado.
+          if [[ "${{ github.event_name }}" == 'push' ]]; then
+            BEFORE='${{ github.event.before }}'
+            if [[ -n "$BEFORE" && ! "$BEFORE" =~ ^0+$ ]] && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+              INSTALLER=$(git diff --name-only "$BEFORE" "$GITHUB_SHA" \
+                | grep -E '^ConversorPedidos_Comercial_Setup_[0-9]+(\.[0-9]+)+[^/]*\.exe$' \
+                | sort -V \
+                | tail -n 1 || true)
+            fi
+          fi
+
+          # Quando o gatilho é latest.json, workflow_dispatch ou a criação do
+          # próprio workflow, usa a versão declarada no manifesto se o arquivo existir.
+          if [[ -z "$INSTALLER" && -f latest.json ]]; then
+            MANIFEST_VERSION=$(python3 - <<'PY'
+          import json
+          try:
+              with open('latest.json', 'r', encoding='utf-8-sig') as f:
+                  print(json.load(f).get('version', ''))
+          except Exception:
+              print('')
+          PY
+            )
+
+            if [[ -n "$MANIFEST_VERSION" ]]; then
+              CANDIDATE="ConversorPedidos_Comercial_Setup_${MANIFEST_VERSION}.exe"
+              if [[ -f "$CANDIDATE" ]]; then
+                INSTALLER="$CANDIDATE"
+              fi
+            fi
+          fi
+
+          # Fallback para execução manual: usa o instalador de maior versão.
+          if [[ -z "$INSTALLER" ]]; then
+            INSTALLER=$(find . -maxdepth 1 -type f -name 'ConversorPedidos_Comercial_Setup_*.exe' -printf '%f\n' \
+              | sort -V \
+              | tail -n 1 || true)
+          fi
+
+          if [[ -z "$INSTALLER" || ! -f "$INSTALLER" ]]; then
+            echo 'Nenhum instalador compatível foi encontrado.' >&2
+            exit 1
+          fi
+
+          BASENAME=$(basename "$INSTALLER")
+          VERSION=${BASENAME#ConversorPedidos_Comercial_Setup_}
+          VERSION=${VERSION%.exe}
+
+          if [[ ! "$VERSION" =~ ^[0-9]+(\.[0-9]+)+([._-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Versão inválida extraída de $BASENAME: $VERSION" >&2
+            exit 1
+          fi
+
+          echo "path=$INSTALLER" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Preparar arquivo com nome fixo e SHA-256
+        id: package
+        shell: bash
+        env:
+          INSTALLER: ${{ steps.installer.outputs.path }}
+        run: |
+          set -euo pipefail
+
+          cp "$INSTALLER" CentralPedidosSetup.exe
+          SHA256=$(sha256sum CentralPedidosSetup.exe | awk '{print $1}')
+          printf '%s  %s\n' "$SHA256" 'CentralPedidosSetup.exe' > CentralPedidosSetup.exe.sha256
+
+          echo "sha256=$SHA256" >> "$GITHUB_OUTPUT"
+
+      - name: Preparar notas da release
+        shell: bash
+        env:
+          VERSION: ${{ steps.installer.outputs.version }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          version = os.environ['VERSION']
+          notes = ''
+
+          manifest = Path('latest.json')
+          if manifest.exists():
+              try:
+                  data = json.loads(manifest.read_text(encoding='utf-8-sig'))
+                  if str(data.get('version', '')) == version:
+                      notes = str(data.get('notes', '') or '').strip()
+              except Exception as exc:
+                  print(f'Aviso: não foi possível ler as notas de latest.json: {exc}')
+
+          if not notes:
+              notes = (
+                  f'# Central de Pedidos {version}\n\n'
+                  'Nova versão do instalador comercial da Central de Pedidos.\n\n'
+                  'O SHA-256 está disponível junto aos arquivos desta release.'
+              )
+
+          Path('release-notes.md').write_text(notes + '\n', encoding='utf-8')
+          PY
+
+      - name: Criar ou atualizar GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.installer.outputs.tag }}
+          VERSION: ${{ steps.installer.outputs.version }}
+        run: |
+          set -euo pipefail
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" \
+              CentralPedidosSetup.exe \
+              CentralPedidosSetup.exe.sha256 \
+              --clobber
+
+            gh release edit "$TAG" \
+              --title "Central de Pedidos $VERSION" \
+              --notes-file release-notes.md \
+              --latest
+          else
+            gh release create "$TAG" \
+              CentralPedidosSetup.exe \
+              CentralPedidosSetup.exe.sha256 \
+              --target "$GITHUB_SHA" \
+              --title "Central de Pedidos $VERSION" \
+              --notes-file release-notes.md \
+              --latest
+          fi
+
+      - name: Atualizar link estável no latest.json
+        id: manifest
+        shell: bash
+        env:
+          VERSION: ${{ steps.installer.outputs.version }}
+          SHA256: ${{ steps.package.outputs.sha256 }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path('latest.json')
+          if not path.exists():
+              print('latest.json não existe; nenhuma alteração necessária.')
+              raise SystemExit(0)
+
+          data = json.loads(path.read_text(encoding='utf-8-sig'))
+          version = os.environ['VERSION']
+
+          if str(data.get('version', '')) != version:
+              print(
+                  f"latest.json está na versão {data.get('version')} e a release é {version}; "
+                  'o manifesto não será alterado.'
+              )
+              raise SystemExit(0)
+
+          data['installer_url'] = (
+              'https://github.com/grneris/central-pedidos-updates/'
+              'releases/latest/download/CentralPedidosSetup.exe'
+          )
+          data['sha256'] = os.environ['SHA256']
+
+          path.write_text(
+              json.dumps(data, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          PY
+
+          if git diff --quiet -- latest.json; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Salvar atualização do manifesto
+        if: steps.manifest.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add latest.json
+          git commit -m "chore: usar link estável da release ${{ steps.installer.outputs.version }}"
+          git push
+
+      - name: Resumo
+        shell: bash
+        env:
+          VERSION: ${{ steps.installer.outputs.version }}
+          SHA256: ${{ steps.package.outputs.sha256 }}
+        run: |
+          {
+            echo '## Release publicada'
+            echo
+            echo "- Versão: **$VERSION**"
+            echo '- Instalador: `CentralPedidosSetup.exe`'
+            echo "- SHA-256: \`$SHA256\`"
+            echo '- Link fixo: `https://github.com/grneris/central-pedidos-updates/releases/latest/download/CentralPedidosSetup.exe`'
+          } >> "$GITHUB_STEP_SUMMARY"

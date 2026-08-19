@@ -198,8 +198,8 @@ jobs:
               raise SystemExit(0)
 
           data['installer_url'] = (
-              'https://github.com/grneris/central-pedidos-updates/'
-              'releases/latest/download/CentralPedidosSetup.exe'
+              'https://raw.githubusercontent.com/grneris/'
+              f'central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_{version}.exe'
           )
           data['sha256'] = os.environ['SHA256']
 
@@ -239,5 +239,5 @@ jobs:
             echo "- Versão: **$VERSION**"
             echo '- Instalador: `CentralPedidosSetup.exe`'
             echo "- SHA-256: \`$SHA256\`"
-            echo '- Link fixo: `https://github.com/grneris/central-pedidos-updates/releases/latest/download/CentralPedidosSetup.exe`'
+            echo "- Link direto: \`https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_$VERSION.exe\`"
           } >> "$GITHUB_STEP_SUMMARY"

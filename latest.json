@@ -1,7 +1,7 @@
 {
-  "version": "3.1.6",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.6.exe",
-  "sha256": "b3602a89ef6dc0d3e3bacfe8dee0a0321d770e066288698bcb0241856eb7cef2",
-  "notes": "- Atualização automática mais confiável no Windows.\n- Mensagens curtas e claras durante a atualização.\n- Novidades apresentadas de forma simples e resumida.",
+  "version": "3.1.7",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.7.exe",
+  "sha256": "b3ab497c59372a9944ac7832aceb6584badce3e4fa6996999ef60b29d68be709",
+  "notes": "Restauração de backups mais confiável entre computadores.\nPreserva a licença instalada no computador de destino.\nPermite concluir a restauração abrindo novamente o aplicativo.",
   "mandatory": false
 }

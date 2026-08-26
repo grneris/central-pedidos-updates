@@ -1,7 +1,7 @@
 {
-  "version": "3.1.8",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.8.exe",
-  "sha256": "7353a6fcb2ce9710b290038fb2bcb8f4f5b0beb88f54a2ab00dfdd3c25ce7baf",
-  "notes": "# Conversor de Pedidos 3.1.8\n\n- Amplia a importação da Central de Pedidos com os layouts do Armazém Malunga\n  e da planilha padrão para clientes.\n- Corrige a leitura de itens em pedidos do Mercado Malunga.\n- Torna a validação do catálogo mais segura, com decisões explícitas para cada\n  EAN e gravação conjunta de produtos, vínculos e exceções por rede.\n- Corrige a criação e a edição manual de vínculos de produtos durante a\n  conferência dos pedidos.",
+  "version": "3.1.10",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.10.exe",
+  "sha256": "1201bcfac6c992ee64cab36900dd455597fb6a9fafeb723b569cbf65625ad8ce",
+  "notes": "# Conversor de Pedidos 3.1.10\n\n- Adiciona a importação automática dos pedidos das redes Redenção e NeoGrid.\n- Preserva os códigos recebidos nos pedidos da Redenção para facilitar o\n  vínculo dos produtos, inclusive quando não há EAN.\n- Corrige a leitura de itens do Armazém Malunga quando o produto não possui um\n  EAN válido e evita descrições repetidas.\n- Reconhece automaticamente pedidos Padovani identificados como “Padovani e\n  Pedrosa” ou “Padovani e Pedroso”.",
   "mandatory": false
 }

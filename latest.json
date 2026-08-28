@@ -1,7 +1,7 @@
 {
-  "version": "3.1.10",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.10.exe",
-  "sha256": "1201bcfac6c992ee64cab36900dd455597fb6a9fafeb723b569cbf65625ad8ce",
-  "notes": "# Conversor de Pedidos 3.1.10\n\n- Adiciona a importação automática dos pedidos das redes Redenção e NeoGrid.\n- Preserva os códigos recebidos nos pedidos da Redenção para facilitar o\n  vínculo dos produtos, inclusive quando não há EAN.\n- Corrige a leitura de itens do Armazém Malunga quando o produto não possui um\n  EAN válido e evita descrições repetidas.\n- Reconhece automaticamente pedidos Padovani identificados como “Padovani e\n  Pedrosa” ou “Padovani e Pedroso”.",
+  "version": "3.1.11",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.11.exe",
+  "sha256": "e7f57a300b1b0448b0e8788cd621cc0e8a0fd1dea271df5e3974df6eb098f1bb",
+  "notes": "# Conversor de Pedidos 3.1.11\n\n- Melhora a conferência da Central de Pedidos, com layout mais compacto em\n  notebooks e menos informações redundantes no resultado da geração.\n- Destaca os itens que não serão exportados e informa diretamente o motivo\n  operacional, mantendo-os visíveis para conferência.\n- Mantém a conferência sincronizada ao alterar a empresa de exportação e usa as\n  mesmas decisões finais de catálogo exibidas na pré-visualização do CSV.\n- Amplia a compatibilidade dos pedidos SIC e atualiza os perfis declarativos de\n  layout, permitindo distribuir futuras correções de leitura pelo manifesto de\n  atualização sem recompilar todo o aplicativo.\n- Reforça o contrato comum de integridade dos importadores e os testes de\n  regressão dos layouts suportados.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
   "mandatory": false
 }

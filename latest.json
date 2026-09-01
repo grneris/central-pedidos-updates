@@ -1,7 +1,92 @@
 {
-  "version": "3.1.11",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.11.exe",
-  "sha256": "e7f57a300b1b0448b0e8788cd621cc0e8a0fd1dea271df5e3974df6eb098f1bb",
-  "notes": "# Conversor de Pedidos 3.1.11\n\n- Melhora a conferência da Central de Pedidos, com layout mais compacto em\n  notebooks e menos informações redundantes no resultado da geração.\n- Destaca os itens que não serão exportados e informa diretamente o motivo\n  operacional, mantendo-os visíveis para conferência.\n- Mantém a conferência sincronizada ao alterar a empresa de exportação e usa as\n  mesmas decisões finais de catálogo exibidas na pré-visualização do CSV.\n- Amplia a compatibilidade dos pedidos SIC e atualiza os perfis declarativos de\n  layout, permitindo distribuir futuras correções de leitura pelo manifesto de\n  atualização sem recompilar todo o aplicativo.\n- Reforça o contrato comum de integridade dos importadores e os testes de\n  regressão dos layouts suportados.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
-  "mandatory": false
+  "version": "3.1.12",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.12.exe",
+  "sha256": "58abe90ddf502d047a64b1661d1e394681ac82d20e086817714ff358ab181288",
+  "notes": "# Conversor de Pedidos 3.1.12\n\n- Torna o leitor do Mercado Malunga resistente a pequenas variações de posição\n  das palavras no PDF, comparando a reconstrução textual e a posicional.\n- Inclui perfis declarativos de Dona, Mercado Malunga, Carrefour/NeoGrid e\n  Padovani para futuras atualizações de rótulos e estratégias homologadas pelo\n  manifesto, sem executar código remoto.\n- Mantém validação determinística de itens, quantidades e valores e registra a\n  versão do perfil utilizada no contrato de integridade.\n- Substitui referências internas de linha nas validações do catálogo por dados\n  visíveis do produto e do vínculo.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
+  "mandatory": false,
+  "layout_updates": {
+    "contract": "central_pedidos.layout_manifest.v1",
+    "profiles": [
+      {
+        "adapter_id": "dona_totvs_pdf_v1",
+        "name": "Dona",
+        "version": "1.0.0",
+        "sha256": "cecb724681685c99a7735b4030af3fb5cc76ac2508bbad58cbb7edad5d4d3ff1",
+        "minimum_app_version": "3.1.12",
+        "profile": {
+          "contract": "central_pedidos.layout_profile.v1",
+          "adapter_id": "dona_totvs_pdf_v1",
+          "name": "Dona",
+          "version": "1.0.0",
+          "schema": "dona_totvs_pdf_layout.v1",
+          "settings": {
+            "line_extraction_mode": "adaptive",
+            "extra_order_labels": [],
+            "extra_issue_date_labels": [],
+            "extra_delivery_date_labels": [],
+            "extra_total_labels": []
+          }
+        }
+      },
+      {
+        "adapter_id": "mercado_malunga_pdf_v1",
+        "name": "Mercado Malunga",
+        "version": "1.0.0",
+        "sha256": "5cdc8f08a545a08c3c08b0ba69db94e1ee056f5b9aeb0acd7218c034df93d3df",
+        "minimum_app_version": "3.1.12",
+        "profile": {
+          "contract": "central_pedidos.layout_profile.v1",
+          "adapter_id": "mercado_malunga_pdf_v1",
+          "name": "Mercado Malunga",
+          "version": "1.0.0",
+          "schema": "mercado_malunga_pdf_layout.v1",
+          "settings": {
+            "line_extraction_mode": "adaptive"
+          }
+        }
+      },
+      {
+        "adapter_id": "neogrid_pdf_v1",
+        "name": "Carrefour/NeoGrid",
+        "version": "1.0.0",
+        "sha256": "97c5382fc8e9c7c63122cd0fd7534a57db16f0429e26a5d658d502504456fe87",
+        "minimum_app_version": "3.1.12",
+        "profile": {
+          "contract": "central_pedidos.layout_profile.v1",
+          "adapter_id": "neogrid_pdf_v1",
+          "name": "Carrefour/NeoGrid",
+          "version": "1.0.0",
+          "schema": "neogrid_pdf_layout.v1",
+          "settings": {
+            "row_extraction_mode": "adaptive",
+            "extra_order_labels": [],
+            "extra_issue_date_labels": [],
+            "extra_delivery_date_labels": [],
+            "extra_total_labels": []
+          }
+        }
+      },
+      {
+        "adapter_id": "padovani_pdf_v1",
+        "name": "Padovani e Pedroso",
+        "version": "1.0.0",
+        "sha256": "466db76e5791524667b0d05147b99baaf4fac2ad7b2368428ee7aa73172f641a",
+        "minimum_app_version": "3.1.12",
+        "profile": {
+          "contract": "central_pedidos.layout_profile.v1",
+          "adapter_id": "padovani_pdf_v1",
+          "name": "Padovani e Pedroso",
+          "version": "1.0.0",
+          "schema": "padovani_pdf_layout.v1",
+          "settings": {
+            "line_extraction_mode": "adaptive",
+            "extra_order_labels": [],
+            "extra_issue_date_labels": [],
+            "extra_delivery_date_labels": [],
+            "extra_total_labels": []
+          }
+        }
+      }
+    ]
+  }
 }

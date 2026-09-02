@@ -1,8 +1,8 @@
 {
-  "version": "3.1.12",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.12.exe",
-  "sha256": "58abe90ddf502d047a64b1661d1e394681ac82d20e086817714ff358ab181288",
-  "notes": "# Conversor de Pedidos 3.1.12\n\n- Torna o leitor do Mercado Malunga resistente a pequenas variações de posição\n  das palavras no PDF, comparando a reconstrução textual e a posicional.\n- Inclui perfis declarativos de Dona, Mercado Malunga, Carrefour/NeoGrid e\n  Padovani para futuras atualizações de rótulos e estratégias homologadas pelo\n  manifesto, sem executar código remoto.\n- Mantém validação determinística de itens, quantidades e valores e registra a\n  versão do perfil utilizada no contrato de integridade.\n- Substitui referências internas de linha nas validações do catálogo por dados\n  visíveis do produto e do vínculo.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
+  "version": "3.1.13",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.13.exe",
+  "sha256": "86be0eded033855bc0cc11817d1954d91b67d23e7a6f6a7e6ccd8f7fb63088ef",
+  "notes": "# Conversor de Pedidos 3.1.13\n\n- Impede a exportação do Mercado Malunga quando a soma dos itens lidos diverge\n  do total declarado no PDF, evitando CSVs incompletos ou com linhas deslocadas.\n- Reconhece linhas de produtos por quilograma no layout Carrefour/NeoGrid.\n- Explica quando o CSV de destino está aberto no Excel, ERP ou outro programa,\n  informando o arquivo e a pasta afetados.\n- Explica quando a empresa de saída selecionada não possui produtos ativos no\n  lote, orientando a revisar empresa, vínculos e situação do catálogo.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
   "mandatory": false,
   "layout_updates": {
     "contract": "central_pedidos.layout_manifest.v1",

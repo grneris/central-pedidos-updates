@@ -1,8 +1,8 @@
 {
-  "version": "3.1.13",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.13.exe",
-  "sha256": "86be0eded033855bc0cc11817d1954d91b67d23e7a6f6a7e6ccd8f7fb63088ef",
-  "notes": "# Conversor de Pedidos 3.1.13\n\n- Impede a exportação do Mercado Malunga quando a soma dos itens lidos diverge\n  do total declarado no PDF, evitando CSVs incompletos ou com linhas deslocadas.\n- Reconhece linhas de produtos por quilograma no layout Carrefour/NeoGrid.\n- Explica quando o CSV de destino está aberto no Excel, ERP ou outro programa,\n  informando o arquivo e a pasta afetados.\n- Explica quando a empresa de saída selecionada não possui produtos ativos no\n  lote, orientando a revisar empresa, vínculos e situação do catálogo.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
+  "version": "3.1.14",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.14.exe",
+  "sha256": "f65320b9333c2be806a0120c5e649c616206258ef284c25abd04c9c43064cec6",
+  "notes": "# Conversor de Pedidos 3.1.14\n\n- Permite que produtos com códigos internos diferentes compartilhem o mesmo EAN\n  no catálogo comercial, mantendo o bloqueio para códigos internos duplicados.\n- Evita recalcular a correspondência do catálogo web quando o conteúdo não foi\n  alterado, reduzindo o tempo de conferência e preflight.\n- Amplia a cobertura do fluxo web para Painel, pedidos aguardando e produtos\n  inativos por rede.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
   "mandatory": false,
   "layout_updates": {
     "contract": "central_pedidos.layout_manifest.v1",

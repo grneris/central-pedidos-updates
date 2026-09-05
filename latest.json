@@ -1,7 +1,7 @@
 {
-  "version": "3.1.15",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.15.exe",
-  "sha256": "e1fc997f0590b75e19c516a57ca3ddcdd8de1f88daae910d609330dadb86c7dc",
-  "notes": "# Conversor de Pedidos 3.1.15\n\n## Principais alterações\n\n- Adiciona os layouts Mercado da 26, Primor e Super Paraíso à Central de\n  Pedidos. Primor e Super Paraíso passam a ser incluídos também nas instalações\n  que já possuíam cadastro local de redes.\n- Corrige o fechamento do pedido Caprichoso quando a referência impressa não é\n  um EAN, preservando o item para o vínculo por código.\n- Permite, quando habilitado em Configurações, incluir um item manual para\n  fechar exatamente o total de um pedido bloqueado. A inclusão é registrada no\n  histórico e exige revisão se o PDF for reprocessado com valores diferentes.\n- A atualização automática agora abre o instalador com progresso visível e\n  reinicia o Conversor ao concluir.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
+  "version": "3.1.16",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.16.exe",
+  "sha256": "e481663791a39c0bf6b5cfe97cea67604f10af384d1a08ad70c92d5912d4c90f",
+  "notes": "# Conversor de Pedidos 3.1.16\n\n## Correções\n\n- A atualização automática agora informa ao instalador o processo que está em\n  execução, aguarda seu encerramento real antes de substituir os arquivos e\n  reinicia o Conversor após concluir.\n- O ensaio de release passou a comprovar a abertura do aplicativo causada pela\n  própria atualização, não apenas a abertura manual após a instalação.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
   "mandatory": false
 }

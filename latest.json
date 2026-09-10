@@ -1,7 +1,7 @@
 {
-  "version": "3.1.17",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.17.exe",
-  "sha256": "c3a1a681ebfd451466762e6a69bcbcc2a4b894fccdfad2dd5e390a22baf5a82b",
-  "notes": "# Conversor de Pedidos 3.1.17\n\n## Correções\n\n- Pedidos do Mercado Malunga com substituição tributária deixam de apresentar\n  divergência falsa entre os itens e o total informado no PDF.\n- A exportação desses pedidos continua usando exclusivamente os valores sem ST,\n  preservando a regra comercial homologada para Malunga, Fazenda Malunga e\n  Clevane.\n- A detecção automática diferencia o layout Mercado Malunga do layout posicional\n  usado pelo Armazém Malunga.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
+  "version": "3.1.18",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.18.exe",
+  "sha256": "e4456bc0312a8f6bb9ef789d3c2b38a6661c281c31448e1170bf46db6debef25",
+  "notes": "# Conversor de Pedidos 3.1.18\n\n## Correções\n\n- O leitor do Mercado Malunga aceita variações homologadas das linhas de itens\n  sem depender de códigos, produtos ou fornecedores específicos.\n- Pedidos destinados à Fazenda Malunga e à Clevane preservam o mesmo contrato\n  de leitura e continuam exportando os valores sem substituição tributária.\n- Pedidos sem cliente vinculado ao CNPJ passam a ser bloqueados na conferência,\n  antes da tentativa de geração dos arquivos.\n- Depois de atualizar o cadastro de clientes, o lote é revalidado imediatamente.\n- Uma tentativa de exportação com erro não mantém na tela o resultado verde de\n  uma geração anterior.\n- Falhas de permissão informam a pasta recusada pelo Windows, e falhas de cliente\n  informam o pedido e o CNPJ que precisam ser cadastrados.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
   "mandatory": false
 }

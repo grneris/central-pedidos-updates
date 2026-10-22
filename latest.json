@@ -1,7 +1,7 @@
 {
-  "version": "3.1.18",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.18.exe",
-  "sha256": "e4456bc0312a8f6bb9ef789d3c2b38a6661c281c31448e1170bf46db6debef25",
-  "notes": "# Conversor de Pedidos 3.1.18\n\n## Correções\n\n- O leitor do Mercado Malunga aceita variações homologadas das linhas de itens\n  sem depender de códigos, produtos ou fornecedores específicos.\n- Pedidos destinados à Fazenda Malunga e à Clevane preservam o mesmo contrato\n  de leitura e continuam exportando os valores sem substituição tributária.\n- Pedidos sem cliente vinculado ao CNPJ passam a ser bloqueados na conferência,\n  antes da tentativa de geração dos arquivos.\n- Depois de atualizar o cadastro de clientes, o lote é revalidado imediatamente.\n- Uma tentativa de exportação com erro não mantém na tela o resultado verde de\n  uma geração anterior.\n- Falhas de permissão informam a pasta recusada pelo Windows, e falhas de cliente\n  informam o pedido e o CNPJ que precisam ser cadastrados.\n\nEsta versão continua sendo distribuída sem assinatura Authenticode. Confira o\narquivo `.sha256` publicado junto do instalador antes da instalação.",
+  "version": "3.1.21",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.21.exe",
+  "sha256": "267f285622ecab953f1c13ab7325f2a207f0acff7044700c268aa6bd7ab52e0f",
+  "notes": "# Conversor de Pedidos 3.1.21\n\n## Alterações\n\n- O leitor do Mercado Malunga reconhece valores de item com separador de milhar,\n  sem perder a linha do pedido. A exportação continua usando o valor sem ST.\n- Inclui o layout temporário Carrefour Excel provisório da versão 3.1.20, com\n  cliente pela coluna LOJA e vínculo de produto pelo RMS, sem desativar os\n  layouts PDF Carrefour e NeoGrid.\n\nEsta versão é distribuída sem assinatura Authenticode. Antes de instalar,\nconfira o SHA-256 do instalador publicado no canal de atualização.",
   "mandatory": false
 }

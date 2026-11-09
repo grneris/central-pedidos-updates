@@ -1,7 +1,7 @@
 {
-  "version": "3.1.21",
-  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.21.exe",
-  "sha256": "267f285622ecab953f1c13ab7325f2a207f0acff7044700c268aa6bd7ab52e0f",
-  "notes": "# Conversor de Pedidos 3.1.21\n\n## Alterações\n\n- O leitor do Mercado Malunga reconhece valores de item com separador de milhar,\n  sem perder a linha do pedido. A exportação continua usando o valor sem ST.\n- Inclui o layout temporário Carrefour Excel provisório da versão 3.1.20, com\n  cliente pela coluna LOJA e vínculo de produto pelo RMS, sem desativar os\n  layouts PDF Carrefour e NeoGrid.\n\nEsta versão é distribuída sem assinatura Authenticode. Antes de instalar,\nconfira o SHA-256 do instalador publicado no canal de atualização.",
+  "version": "3.1.23",
+  "installer_url": "https://raw.githubusercontent.com/grneris/central-pedidos-updates/main/ConversorPedidos_Comercial_Setup_3.1.23.exe",
+  "sha256": "a8c5e61b056c8f119bf851a06059bbb83beeefc5dc51ba4274cf54630f8378ec",
+  "notes": "# Conversor de Pedidos 3.1.23\n\n## Alterações\n\n- O leitor Sendas/Assaí consolida páginas de continuação da mesma loja antes\n  de conferir o total do pedido. O total impresso prevalece sobre subtotais\n  calculados em páginas sem total; divergências reais continuam bloqueando a\n  exportação.\n- Mantém as melhorias anteriores: leitura do Mercado Malunga com separador de\n  milhar e exportação pelo valor sem ST; Carrefour Excel provisório com vínculo\n  por RMS, sem desativar os layouts PDF Carrefour e NeoGrid.\n\nEsta versão é distribuída sem assinatura Authenticode. Antes de instalar,\nconfira o SHA-256 do instalador publicado no canal de atualização.",
   "mandatory": false
 }
